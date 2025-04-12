@@ -2,9 +2,9 @@ variables:
   CI_DOCKERHUB_IMAGE: huncrys/plexsso
 
 include:
-  - component: $CI_SERVER_FQDN/oaklab/ci-templates/docker-publish@~latest
+  - component: $CI_SERVER_FQDN/oaklab/ci-templates/oci-publish@8.3.1
     inputs:
-      architectures:
-        - amd64
-        - arm64
-        - arm/v7
+      platforms:
+        - linux/amd64
+        - linux/arm64
+        - linux/arm/v7
