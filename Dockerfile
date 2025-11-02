@@ -10,13 +10,14 @@ WORKDIR /backend
 RUN dotnet restore && \
     dotnet publish PlexSSO.sln -c Release -o build /p:CopyOutputSymbolsToPublishDirectory=false /p:DebugType=None /p:DebugSymbols=false && \
     rm build/ui/index.html
-COPY --from=react-builder /ui/build /backend/build/ui
+RUN mkdir -p /rootfs/config && \
+    chmod 777 /rootfs/config && \
+    mv -T /backend/build /rootfs/app
+COPY --from=react-builder /ui/build /rootfs/app/ui
 
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
 WORKDIR /app
-COPY --from=aspnet-builder /backend/build /app
-RUN mkdir -p /config && \
-    chmod 777 /config
+COPY --from=aspnet-builder /rootfs/ /
 ENTRYPOINT ["dotnet", "PlexSSO.dll", "--config", "/config/"]
 EXPOSE 4200
 VOLUME [ "/config" ]
