@@ -1,8 +1,9 @@
 variables:
   CI_DOCKERHUB_IMAGE: huncrys/plexsso
+  CI_GHCR_IMAGE: huncrys/plexsso
 
 include:
-  - component: $CI_SERVER_FQDN/oaklab/ci-templates/oci-publish@8
+  - component: $CI_SERVER_FQDN/oaklab/ci-templates/oci-publish@9
     inputs:
       platforms:
         - linux/amd64
