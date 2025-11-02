@@ -1,10 +1,10 @@
-FROM --platform=$BUILDPLATFORM node:current-alpine as react-builder
+FROM --platform=$BUILDPLATFORM node:lts-alpine AS react-builder
 COPY ./ui /ui
 WORKDIR /ui
 RUN corepack yarn && \
     corepack yarn build
 
-FROM mcr.microsoft.com/dotnet/sdk:9.0 as aspnet-builder
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS aspnet-builder
 COPY ./backend /backend
 WORKDIR /backend
 RUN dotnet restore && \
