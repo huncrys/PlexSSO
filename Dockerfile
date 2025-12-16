@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM node:current-alpine as react-builder
+FROM --platform=$BUILDPLATFORM node:current-alpine AS react-builder
 COPY ./ui /ui
 WORKDIR /ui
 RUN rm -f /usr/local/bin/yarn* && \
