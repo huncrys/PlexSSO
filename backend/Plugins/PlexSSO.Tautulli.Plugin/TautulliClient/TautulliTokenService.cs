@@ -32,12 +32,17 @@ namespace PlexSSO.Tautulli.Plugin.TautulliClient
 
         public async Task<AuthenticationToken> GetServiceToken(Identity identity)
         {
+            var config = _configurationService.GetPluginConfig<TautulliConfig>(TautulliConstants.PluginName);
             var request = new HttpRequestMessage(HttpMethod.Post, GetHostname() + "/auth/signin");
             request.Content = new StringContent($"username=&password=&token={identity.AccessToken.Value}&remember_me=1",
                 Encoding.UTF8,
                 "application/x-www-form-urlencoded");
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("User-Agent", "PlexSSO/2");
+            if (!string.IsNullOrWhiteSpace(config?.ApiKey))
+            {
+                request.Headers.Add("X-Api-Key", config.ApiKey);
+            }
 
             var response = await _httpClient.SendAsync(request);
             response.EnsureSuccessStatusCode();

@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using PlexSSO.Plugin;
 using PlexSSO.Service;
 using PlexSSO.Service.Config;
@@ -21,11 +21,26 @@ namespace PlexSSO.Tautulli.Plugin
             var config = configurationService.GetPluginConfig<TautulliConfig>(TautulliConstants.PluginName);
             var publicHostname = configurationService.Config
                 .TryGetPluginConfigValue(TautulliConstants.PluginName, TautulliConstants.PublicHostname);
+            var apiKey = configurationService.Config
+                .TryGetPluginConfigValue(TautulliConstants.PluginName, TautulliConstants.ApiKey);
 
+            var changed = false;
             if (string.IsNullOrWhiteSpace(config.PublicHostname) &&
                 !string.IsNullOrWhiteSpace(publicHostname))
             {
                 config.PublicHostname = publicHostname;
+                changed = true;
+            }
+
+            if (string.IsNullOrWhiteSpace(config.ApiKey) &&
+                !string.IsNullOrWhiteSpace(apiKey))
+            {
+                config.ApiKey = apiKey;
+                changed = true;
+            }
+
+            if (changed)
+            {
                 configurationService.SavePluginConfig(TautulliConstants.PluginName, config);
             }
         }

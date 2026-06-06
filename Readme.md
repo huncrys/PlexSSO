@@ -64,7 +64,8 @@ By default PlexSSO is configurable using a configuration stored in the `config.j
     ]
   },
   "ombiPublicHostname": "https://ombi.example.com",
-  "tautulliPublicHostname": "https://plexpy.example.com"
+  "tautulliPublicHostname": "https://plexpy.example.com",
+  "tautulliApiKey": "your-tautulli-api-key"
 }
 ```
 
@@ -87,6 +88,7 @@ By default PlexSSO is configurable using a configuration stored in the `config.j
 | `blockMessage` | A custom message to deliver when access is denied due to this rule. Supports HTML. |
 | `ombiPublicHostname` | The public facing hostname of Ombi (if present), must be reachable from PlexSSO. Will authenticate the user with Ombi using Ombi's native authentication allowing them to use their own account with the SSO. |
 | `tautulliPublicHostname` | The public facing hostname of Tautulli/PlexPy (if present), must be reachable from PlexSSO. Will authenticate the user with Tautulli using Tautulli's native authentication allowing them to use their own account with the SSO. |
+| `tautulliApiKey` | The API Key for Tautulli (if present). Required for Tautulli v2.17.1+ to bypass/validate CSRF token checks during login. Alternatively, configure `apiKey` inside `tautulli.config.json` plugin config file. |
 
 ## Retrieving Plex Server Identifier
 

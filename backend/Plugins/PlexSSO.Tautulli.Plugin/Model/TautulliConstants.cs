@@ -1,8 +1,9 @@
-﻿namespace PlexSSO.Tautulli.Plugin.Model
+namespace PlexSSO.Tautulli.Plugin.Model
 {
     public static class TautulliConstants
     {
         public const string PluginName = "tautulli";
         public const string PublicHostname = "publicHostname";
+        public const string ApiKey = "apiKey";
     }
 }
