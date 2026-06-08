@@ -4,6 +4,5 @@ namespace PlexSSO.Tautulli.Plugin.Model
     {
         public const string PluginName = "tautulli";
         public const string PublicHostname = "publicHostname";
-        public const string ApiKey = "apiKey";
     }
 }
